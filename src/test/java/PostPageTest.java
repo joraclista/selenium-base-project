@@ -37,7 +37,7 @@ public class PostPageTest extends AbstractPageTest<PostPage> {
 
         assertEquals(getPage().getPostUser().getText(), "robux");
         assertTrue(!getPage().getPostTime().getText().isEmpty());
-        
+
         assertIterableEquals(
                 getPage().getHubLinks().stream().map(item -> item.getText()).collect(toList()),
                 asList("Сетевые технологии", "Децентрализованные сети", "Mesh-сети"));
