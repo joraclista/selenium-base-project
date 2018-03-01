@@ -1,0 +1,8 @@
+language: java
+dist: precise
+
+jdk:
+  - oraclejdk8
+
+
+script: mvn clean test
