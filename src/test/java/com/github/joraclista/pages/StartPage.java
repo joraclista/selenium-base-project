@@ -1,3 +1,5 @@
+package com.github.joraclista.pages;
+
 import lombok.Getter;
 import net.thucydides.core.pages.Pages;
 import org.openqa.selenium.WebDriver;

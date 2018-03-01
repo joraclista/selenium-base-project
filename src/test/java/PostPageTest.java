@@ -1,4 +1,5 @@
-import base.AbstractPageTest;
+import com.github.joraclista.base.AbstractPageTest;
+import com.github.joraclista.pages.PostPage;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
@@ -26,8 +27,6 @@ public class PostPageTest extends AbstractPageTest<PostPage> {
 
         assertEquals(getPage().getPostTitle().getText(), "Обмен данными в распределенных сетях");
 
-
-
         getPage().getShareLinks().stream().map(link -> link.getAttribute("href")).forEach(href -> {
             assertTrue(asList("www.facebook.com", "twitter.com", "vk.com", "t.me", "getpocket.com")
                     .stream()
@@ -43,7 +42,6 @@ public class PostPageTest extends AbstractPageTest<PostPage> {
                 .map(item -> item.getText())
                 .collect(toList()), asList("Сетевые технологии", "Децентрализованные сети", "Mesh-сети"));
         assertEquals(getPage().getShareButton().getText(), "Поделиться публикацией");
-
     }
 
 }

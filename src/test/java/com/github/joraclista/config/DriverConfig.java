@@ -1,4 +1,4 @@
-package config;
+package com.github.joraclista.config;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

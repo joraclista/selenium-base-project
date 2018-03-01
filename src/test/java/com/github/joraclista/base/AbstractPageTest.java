@@ -1,6 +1,6 @@
-package base;
+package com.github.joraclista.base;
 
-import config.Configuration;
+import com.github.joraclista.config.Configuration;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.thucydides.core.pages.Pages;
@@ -9,11 +9,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
+
+import static org.openqa.selenium.support.PageFactory.initElements;
 
 /**
  * Created by Alisa
@@ -25,6 +26,7 @@ public abstract class AbstractPageTest<T extends Pages> {
     private final String pageUrl;
     @Getter
     private final Class<T> pageClass;
+
     private Function<WebDriver, Boolean> loadPageUntil = driver -> true;
 
     @Getter
@@ -55,7 +57,7 @@ public abstract class AbstractPageTest<T extends Pages> {
 
         new WebDriverWait(driver, config.getDriverConfig().getPageLoadTimeoutInSec()).until(loadPageUntil);
 
-        page = PageFactory.initElements(driver, pageClass);
+        page = initElements(driver, pageClass);
     }
 
     @AfterEach

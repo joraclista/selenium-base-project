@@ -1,4 +1,6 @@
-import base.AbstractPageTest;
+import com.github.joraclista.base.AbstractPageTest;
+import com.github.joraclista.pages.StartPage;
+import com.github.joraclista.pages.StartPagePost;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
