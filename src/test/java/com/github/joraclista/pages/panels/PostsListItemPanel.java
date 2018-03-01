@@ -1,4 +1,4 @@
-package com.github.joraclista.pages;
+package com.github.joraclista.pages.panels;
 
 import lombok.Getter;
 import net.thucydides.core.pages.Pages;
@@ -13,9 +13,9 @@ import java.util.List;
  * version 1.0.
  */
 @Getter
-public class StartPagePost extends Pages {
+public class PostsListItemPanel extends Pages {
 
-    public StartPagePost(WebDriver driver) {
+    public PostsListItemPanel(WebDriver driver) {
         super(driver);
     }
 

@@ -13,9 +13,9 @@ import java.util.List;
  * version 1.0.
  */
 @Getter
-public class StartPage extends Pages {
+public class HomePage extends Pages {
 
-    public StartPage(WebDriver driver) {
+    public HomePage(WebDriver driver) {
         super(driver);
     }
 

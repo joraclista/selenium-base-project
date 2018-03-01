@@ -1,6 +1,6 @@
 import com.github.joraclista.base.AbstractPageTest;
-import com.github.joraclista.pages.StartPage;
-import com.github.joraclista.pages.StartPagePost;
+import com.github.joraclista.pages.HomePage;
+import com.github.joraclista.pages.panels.PostsListItemPanel;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
@@ -18,10 +18,10 @@ import static org.junit.jupiter.api.Assertions.*;
  * version 1.0.
  */
 @RunWith(JUnitPlatform.class)
-public class StartPageTest extends AbstractPageTest<StartPage> {
+public class HomePageTest extends AbstractPageTest<HomePage> {
 
-    public StartPageTest() {
-        super("http://localhost:8080/habrahabr/", StartPage.class);
+    public HomePageTest() {
+        super("http://localhost:8080/habrahabr/", HomePage.class);
         withLoadPageUntil(driver -> !driver.findElements(By.id("navbar-links")).isEmpty());
     }
 
@@ -42,7 +42,7 @@ public class StartPageTest extends AbstractPageTest<StartPage> {
 
         getPage().getPostsList().stream()
                 .map(postElement -> {
-                    StartPagePost postBlock = new StartPagePost(getDriver());
+                    PostsListItemPanel postBlock = new PostsListItemPanel(getDriver());
                     PageFactory.initElements(
                             new HtmlElementLocatorFactory(postElement),
                             postBlock);
