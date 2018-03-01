@@ -5,13 +5,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.PageFactory;
 import ru.yandex.qatools.htmlelements.loader.decorator.HtmlElementLocatorFactory;
 
-import java.util.stream.Collectors;
-
 import static java.util.Arrays.asList;
+import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.openqa.selenium.support.PageFactory.initElements;
 
 /**
  * Created by Alisa
@@ -29,35 +28,30 @@ public class HomePageTest extends AbstractPageTest<HomePage> {
     public void testPage() {
         assertEquals(getPage().getDriver().getTitle(), "Лучшие публикации за сутки / Хабрахабр");
 
-        assertIterableEquals(getPage().getNavBarLinks().stream().map(i -> i.getText()).collect(Collectors.toList()),
+        assertIterableEquals(
+                getPage().getNavBarLinks().stream().map(link -> link.getText()).collect(toList()),
                 asList("Публикации", "Пользователи", "Хабы", "Компании", "Песочница"));
 
-        getPage().getNavBarLinks().stream().map(i -> i.getAttribute("href")).forEach(href -> {
-            assertTrue(asList("/", "/users/", "/hubs/", "/companies/", "/sandbox/")
-                    .stream()
-                    .filter(item -> href.contains(item))
-                    .findFirst()
-            .isPresent());
-        });
+        getPage().getNavBarLinks().stream().map(link -> link.getAttribute("href"))
+                .forEach(href -> assertTrue(asList("/", "/users/", "/hubs/", "/companies/", "/sandbox/")
+                                .stream()
+                                .filter(item -> href.contains(item))
+                                .findFirst()
+                                .isPresent()));
 
         getPage().getPostsList().stream()
                 .map(postElement -> {
-                    PostsListItemPanel postBlock = new PostsListItemPanel(getDriver());
-                    PageFactory.initElements(
-                            new HtmlElementLocatorFactory(postElement),
-                            postBlock);
-                    return postBlock;
-                })
-        .forEach(item -> {
-            assertTrue(!item.getPostUser().getText().isEmpty());
-            assertTrue(!item.getPostTime().getText().isEmpty());
-            assertTrue(!item.getPostTitle().getText().isEmpty());
-            assertTrue(!item.getHubLinks().isEmpty());
-            assertTrue(!item.getPostBody().isEmpty());
-            assertTrue(item.getReadMoreButton().getText().contains("Читать дальше"));
+                    PostsListItemPanel post = new PostsListItemPanel(getDriver());
+                    initElements(new HtmlElementLocatorFactory(postElement), post);
+                    return post;
+                }).forEach(post -> {
+            assertTrue(!post.getPostUser().getText().isEmpty());
+            assertTrue(!post.getPostTime().getText().isEmpty());
+            assertTrue(!post.getPostTitle().getText().isEmpty());
+            assertTrue(!post.getHubLinks().isEmpty());
+            assertTrue(!post.getPostBody().isEmpty());
+            assertTrue(post.getReadMoreButton().getText().contains("Читать дальше"));
         });
 
-
     }
-
 }

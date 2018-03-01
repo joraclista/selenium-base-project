@@ -27,20 +27,21 @@ public class PostPageTest extends AbstractPageTest<PostPage> {
 
         assertEquals(getPage().getPostTitle().getText(), "Обмен данными в распределенных сетях");
 
-        getPage().getShareLinks().stream().map(link -> link.getAttribute("href")).forEach(href -> {
-            assertTrue(asList("www.facebook.com", "twitter.com", "vk.com", "t.me", "getpocket.com")
+        getPage().getShareLinks().stream()
+                .map(link -> link.getAttribute("href"))
+                .forEach(href -> assertTrue(asList("www.facebook.com", "twitter.com", "vk.com", "t.me", "getpocket.com")
                     .stream()
                     .filter(item -> href.contains(item))
                     .findFirst()
-            .isPresent());
-        });
+                    .isPresent()));
 
         assertEquals(getPage().getPostUser().getText(), "robux");
         assertTrue(!getPage().getPostTime().getText().isEmpty());
-        assertIterableEquals(getPage().getHubLinks()
-                .stream()
-                .map(item -> item.getText())
-                .collect(toList()), asList("Сетевые технологии", "Децентрализованные сети", "Mesh-сети"));
+        
+        assertIterableEquals(
+                getPage().getHubLinks().stream().map(item -> item.getText()).collect(toList()),
+                asList("Сетевые технологии", "Децентрализованные сети", "Mesh-сети"));
+
         assertEquals(getPage().getShareButton().getText(), "Поделиться публикацией");
     }
 
