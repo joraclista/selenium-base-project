@@ -1,3 +1,6 @@
+package base;
+
+import config.Configuration;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.thucydides.core.pages.Pages;
@@ -9,13 +12,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
-
-import static java.nio.file.Paths.get;
 
 /**
  * Created by Alisa
@@ -46,18 +44,16 @@ public abstract class AbstractPageTest<T extends Pages> {
 
     @BeforeEach
     public void start() {
-        System.setProperty("webdriver.chrome.driver","C:\\Users\\Alisa\\My Space\\Soft\\selenium\\chromedriver_win32\\chromedriver.exe");
-        ChromeOptions options = new ChromeOptions();
-        options.setBinary("C:\\Users\\Alisa\\AppData\\Local\\Google\\Chrome SxS\\Application\\chrome.exe");
+        Configuration config = new Configuration();
+        System.setProperty("webdriver." + config.getDriverConfig().getId() + ".driver", config.getDriverConfig().getBrowserExe());
 
+        driver = new ChromeDriver(new ChromeOptions().setBinary(config.getDriverConfig().getBrowserBinary()));
 
-        driver = new ChromeDriver(options);
-
-        driver.manage().timeouts().pageLoadTimeout(50, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(config.getDriverConfig().getPageLoadTimeoutInSec(), TimeUnit.SECONDS);
 
         driver.get(pageUrl);
 
-        new WebDriverWait(driver, 50).until(loadPageUntil);
+        new WebDriverWait(driver, config.getDriverConfig().getPageLoadTimeoutInSec()).until(loadPageUntil);
 
         page = PageFactory.initElements(driver, pageClass);
     }
@@ -65,15 +61,6 @@ public abstract class AbstractPageTest<T extends Pages> {
     @AfterEach
     public void quit() {
         driver.quit();
-    }
-
-    private void readProperties() {
-        Properties properties = new Properties();
-        try(InputStream is = new FileInputStream(get("src","test", "resources", "driver.properties").toFile())) {
-            properties.load(is);
-        } catch (Exception e) {
-            log.error("couldn't load properties due to err.msg = {}", e.getMessage());
-        }
     }
 
 }
