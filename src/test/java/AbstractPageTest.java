@@ -1,4 +1,5 @@
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import net.thucydides.core.pages.Pages;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,13 +9,19 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
+
+import static java.nio.file.Paths.get;
 
 /**
  * Created by Alisa
  * version 1.0.
  */
+@Slf4j
 public abstract class AbstractPageTest<T extends Pages> {
     @Getter
     private final String pageUrl;
@@ -58,6 +65,15 @@ public abstract class AbstractPageTest<T extends Pages> {
     @AfterEach
     public void quit() {
         driver.quit();
+    }
+
+    private void readProperties() {
+        Properties properties = new Properties();
+        try(InputStream is = new FileInputStream(get("src","test", "resources", "driver.properties").toFile())) {
+            properties.load(is);
+        } catch (Exception e) {
+            log.error("couldn't load properties due to err.msg = {}", e.getMessage());
+        }
     }
 
 }

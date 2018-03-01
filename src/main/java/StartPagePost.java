@@ -13,11 +13,9 @@ import java.util.List;
 @Getter
 public class StartPagePost extends Pages {
 
-
     public StartPagePost(WebDriver driver) {
         super(driver);
     }
-
 
     @FindBy(xpath = "//header[@class='post__meta']/span[@class='post__time']")
     private WebElement postTime;
@@ -31,6 +29,7 @@ public class StartPagePost extends Pages {
 
     @FindBy(xpath = "//div[contains(@class, 'post__body_crop')]//div[contains(@class, 'post__text')]/p")
     private List<WebElement> postBody;
+
     @FindBy(xpath = "//ul[contains(@class, 'post__hubs')]/li/a[contains(@class, 'hub-link')]")
     private List<WebElement> hubLinks;
 

@@ -13,11 +13,9 @@ import java.util.List;
 @Getter
 public class StartPage extends Pages {
 
-
     public StartPage(WebDriver driver) {
         super(driver);
     }
-
 
     @FindBy(xpath = "//a[@class='logo']")
     private WebElement logoLink;
@@ -30,12 +28,5 @@ public class StartPage extends Pages {
 
     @FindBy(xpath = "//div[@class='posts_list']/ul[@class='content-list content-list_posts shortcuts_items']/li/article")
     private List<WebElement> postsList;
-
-//    @FindBy(css = "#user_search_results")
-//    private WebElement userList;
-//
-//    @FindBy(css = ".user-list-info em")
-//    private List<WebElement> userListAccountNames;
-
 
 }
