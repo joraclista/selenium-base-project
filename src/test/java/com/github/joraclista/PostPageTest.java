@@ -1,3 +1,5 @@
+package com.github.joraclista;
+
 import com.github.joraclista.base.AbstractPageTest;
 import com.github.joraclista.pages.PostPage;
 import org.junit.jupiter.api.Test;

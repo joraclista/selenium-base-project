@@ -1,3 +1,5 @@
+package com.github.joraclista;
+
 import com.github.joraclista.base.AbstractPageTest;
 import com.github.joraclista.pages.HomePage;
 import com.github.joraclista.pages.panels.PostsListItemPanel;
