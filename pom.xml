@@ -14,6 +14,7 @@
         <junit.jupiter.version>5.0.2</junit.jupiter.version>
         <junit.platform.version>1.0.2</junit.platform.version>
         <properties.file.suffix>dev</properties.file.suffix>
+        <selenium.version>3.8.1</selenium.version>
     </properties>
 
 
@@ -106,13 +107,13 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>3.7.0</version>
+            <version>${selenium.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-chrome-driver -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-chrome-driver</artifactId>
-            <version>3.7.0</version>
+            <version>${selenium.version}</version>
         </dependency>
         <dependency>
             <groupId>ru.yandex.qatools.htmlelements</groupId>
