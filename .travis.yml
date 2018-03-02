@@ -5,4 +5,4 @@ jdk:
   - oraclejdk8
 
 
-script: mvn clean test
+script: mvn clean test -P qa
