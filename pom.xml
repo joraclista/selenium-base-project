@@ -13,8 +13,33 @@
         <junit.version>4.12</junit.version>
         <junit.jupiter.version>5.0.2</junit.jupiter.version>
         <junit.platform.version>1.0.2</junit.platform.version>
+        <properties.file.suffix>dev</properties.file.suffix>
     </properties>
 
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <properties.file.suffix>dev</properties.file.suffix>
+            </properties>
+        </profile>
+        <profile>
+            <id>qa</id>
+            <properties>
+                <properties.file.suffix>qa</properties.file.suffix>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <properties.file.suffix>prod</properties.file.suffix>
+            </properties>
+        </profile>
+    </profiles>
 
     <build>
         <resources>
@@ -32,12 +57,35 @@
                     <target>${java.version}</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <!-- here the phase you need -->
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/src/test/resources</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/test/resources/${properties.file.suffix}</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+        </plugin>
         </plugins>
     </build>
 
 
     <dependencies>
-        
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

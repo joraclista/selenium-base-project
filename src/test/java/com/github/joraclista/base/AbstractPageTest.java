@@ -33,10 +33,14 @@ public abstract class AbstractPageTest<T extends Pages> {
     private T page;
     @Getter
     private WebDriver driver;
+    @Getter
+    private Configuration config;
 
     public AbstractPageTest(String pageUrl, Class<T> pageClass) {
-        this.pageUrl = pageUrl;
+        this.config = new Configuration();
+        this.pageUrl = config.getHostUrl() + pageUrl;
         this.pageClass = pageClass;
+        log.info("Test is configured for pageUrl = {}", this.pageUrl);
     }
 
     public AbstractPageTest withLoadPageUntil(Function<WebDriver, Boolean> loadPageUntil) {
@@ -46,7 +50,6 @@ public abstract class AbstractPageTest<T extends Pages> {
 
     @BeforeEach
     public void start() {
-        Configuration config = new Configuration();
         System.setProperty("webdriver." + config.getDriverConfig().getId() + ".driver", config.getDriverConfig().getBrowserExe());
 
         driver = new ChromeDriver(new ChromeOptions().setBinary(config.getDriverConfig().getBrowserBinary()));

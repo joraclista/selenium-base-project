@@ -20,7 +20,7 @@ import static org.openqa.selenium.support.PageFactory.initElements;
 public class HomePageTest extends AbstractPageTest<HomePage> {
 
     public HomePageTest() {
-        super("http://localhost:8080/habrahabr/", HomePage.class);
+        super("/", HomePage.class);
         withLoadPageUntil(driver -> !driver.findElements(By.id("navbar-links")).isEmpty());
     }
 

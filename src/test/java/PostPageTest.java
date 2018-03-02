@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PostPageTest extends AbstractPageTest<PostPage> {
 
     public PostPageTest() {
-        super("http://localhost:8080/habrahabr/post.html", PostPage.class);
+        super("/post/350220/", PostPage.class);
         withLoadPageUntil(driver -> !driver.findElements(By.xpath("//article//h1//span[@class='post__title-text']")).isEmpty());
     }
 

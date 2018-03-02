@@ -13,7 +13,8 @@ public enum Props {
     WEB_DRIVER_ID("web.driver.id"),
     BROWSER_INSTALLATION_BINARY("browser.installation.binary"),
     DRIVER_EXE("driver.exe"),
-    PAGE_LOAD_TIMEOUT("page.load.timeout.sec");
+    PAGE_LOAD_TIMEOUT("page.load.timeout.sec"),
+    HOST("website.host");
 
     private final String property;
 
